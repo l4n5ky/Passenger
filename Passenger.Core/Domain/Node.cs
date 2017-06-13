@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Passenger.Core.Domain
 {
     public class Node
     {
+        private static readonly Regex NameRegex = new Regex("^(?![_.-])(?!.*[_.-]{2})[a-zA-Z0-9._.-]+(?<![_.-])$");
+
         public string Address { get; protected set; }
         public double Latitude { get; protected set; }
         public double Longitude { get; protected set; }
@@ -22,9 +25,9 @@ namespace Passenger.Core.Domain
 
         private void SetAdress(string address)
         {
-            if (string.IsNullOrWhiteSpace(address))
+            if (!NameRegex.IsMatch(address))
             {
-                throw new Exception("Adress is empty.");
+                throw new Exception("Adress is incorrect.");
             }
 
             Address = address;

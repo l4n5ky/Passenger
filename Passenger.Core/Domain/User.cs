@@ -15,9 +15,9 @@ namespace Passenger.Core.Domain
         public string FullName { get; protected set; }
         public string Role { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
-        public DateTime UpdateAt { get; protected set; }
+        public DateTime UpdatedAt { get; protected set; }
 
-        protected User() { } // will be empty to protect
+        protected User() { }
 
         public User(Guid userId, string email, string username, string role, string password, string salt)
         {
@@ -41,7 +41,7 @@ namespace Passenger.Core.Domain
             }
 
             Email = email;
-            UpdateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SetUsername(string username)
@@ -56,7 +56,7 @@ namespace Passenger.Core.Domain
             }
 
             Username = username.ToLowerInvariant();
-            UpdateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SetRole(string role)
@@ -71,7 +71,7 @@ namespace Passenger.Core.Domain
             }
 
             Role = role;
-            UpdateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SetPassword(string password, string salt)
@@ -99,7 +99,7 @@ namespace Passenger.Core.Domain
 
             Password = password;
             Salt = salt;
-            UpdateAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
 
         }
     }
