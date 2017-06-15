@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Passenger.Core", "Passenger
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Passenger.Infrastructure", "Passenger.Infrastructure\Passenger.Infrastructure.csproj", "{D06084C2-FEAF-43D8-8F94-10CBFE4BD12B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Passenger.Tests", "Passenger.Tests\Passenger.Tests.csproj", "{5457C4EB-ACCF-4AE7-91CD-CA9A0C2B4115}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Passenger.Api", "Passenger.Api\Passenger.Api.csproj", "{184CBBC4-3A81-4921-9DAD-FF299EDA2F26}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{D06084C2-FEAF-43D8-8F94-10CBFE4BD12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D06084C2-FEAF-43D8-8F94-10CBFE4BD12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D06084C2-FEAF-43D8-8F94-10CBFE4BD12B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5457C4EB-ACCF-4AE7-91CD-CA9A0C2B4115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5457C4EB-ACCF-4AE7-91CD-CA9A0C2B4115}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5457C4EB-ACCF-4AE7-91CD-CA9A0C2B4115}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5457C4EB-ACCF-4AE7-91CD-CA9A0C2B4115}.Release|Any CPU.Build.0 = Release|Any CPU
 		{184CBBC4-3A81-4921-9DAD-FF299EDA2F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{184CBBC4-3A81-4921-9DAD-FF299EDA2F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{184CBBC4-3A81-4921-9DAD-FF299EDA2F26}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -4,7 +4,7 @@ using Passenger.Infrastructure.Commands;
 namespace Passenger.Api.Controllers
 {
     [Route("[controller]")]
-    public class ApiControllerBase : Controller
+    public abstract class ApiControllerBase : Controller
     {
         protected readonly ICommandDispatcher CommandDispatcher;
 

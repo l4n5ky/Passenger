@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace Passenger.Infrastructure.Services
 {
-    public interface IUserService
+    public interface IUserService : IService
     {
         Task<UserDto> GetAsync(string email);
 
         Task<IEnumerable<UserDto>> BrowseAsync();
 
-        Task RegisterAsync(string email, string username, string password);
+        Task RegisterAsync(string email, string username, string password, string role);
     }
 }

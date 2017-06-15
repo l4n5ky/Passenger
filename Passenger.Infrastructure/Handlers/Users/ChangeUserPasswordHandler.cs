@@ -8,6 +8,7 @@ namespace Passenger.Infrastructure.Handlers.Users
     {
         public async Task HandleAsync(ChangeUserPassword command)
         {
+            // TODO: Change user password logic
             await Task.CompletedTask;
         }
     }

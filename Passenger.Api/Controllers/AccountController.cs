@@ -9,7 +9,6 @@ namespace Passenger.Api.Controllers
     {
         public AccountController(ICommandDispatcher commandDispatcher) : base(commandDispatcher)
         {
-
         }
 
         [HttpPut]

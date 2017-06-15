@@ -7,13 +7,10 @@ namespace Passenger.Core.Domain
     public class DailyRoute
     {
         private ISet<PassengerNode> _passengerNodes = new HashSet<PassengerNode>();
+
         public Guid Id { get; protected set; }
         public Route Route { get; protected set; }
-        public IEnumerable<PassengerNode> PassengerNodes
-        {
-            get { return _passengerNodes; }
-            set { _passengerNodes = new HashSet<PassengerNode>(value); }
-        }
+        public IEnumerable<PassengerNode> PassengerNodes => _passengerNodes;
 
         protected DailyRoute()
         {
