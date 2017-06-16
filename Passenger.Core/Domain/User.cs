@@ -19,9 +19,9 @@ namespace Passenger.Core.Domain
 
         protected User() { }
 
-        public User(Guid userId, string email, string username, string role, string password, string salt)
+        public User(string email, string username, string role, string password, string salt)
         {
-            Id = userId;
+            Id = Guid.NewGuid();
             SetEmail(email);
             SetUsername(username);
             SetRole(role);
@@ -88,7 +88,7 @@ namespace Passenger.Core.Domain
             {
                 throw new DomainException(ErrorCodes.InvalidPassword, "Password must contain at least 6 characters.");
             }
-            if (password.Length > 20)
+            if (password.Length > 100)
             {
                 throw new DomainException(ErrorCodes.InvalidPassword, "Password can not contain more than 20 characters.");
             }

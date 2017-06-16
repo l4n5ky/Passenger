@@ -5,8 +5,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Passenger.Infrastructure.IoC.Modules;
+using Passenger.Infrastructure.Settings;
 using System;
+using System.Text;
 
 namespace Passenger.Api
 {
@@ -30,6 +33,7 @@ namespace Passenger.Api
         {
             // Add framework services. 
             services.AddMvc();
+            services.AddMemoryCache();
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -45,6 +49,19 @@ namespace Passenger.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            var jwtSettings = app.ApplicationServices.GetService<JwtSettings>();
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = jwtSettings.Issuer,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+                }
+            });
 
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());

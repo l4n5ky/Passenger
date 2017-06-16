@@ -2,28 +2,29 @@
 using Microsoft.Extensions.Caching.Memory;
 using Passenger.Infrastructure.Commands;
 using Passenger.Infrastructure.Commands.Accounts;
-using Passenger.Infrastructure.Commands.Users;
 using Passenger.Infrastructure.Extensions;
+using System;
 using System.Threading.Tasks;
 
 namespace Passenger.Api.Controllers
 {
-    public class AccountController : ApiControllerBase
+    public class LoginController : ApiControllerBase
     {
         private readonly IMemoryCache _cache;
 
-        public AccountController(ICommandDispatcher commandDispatcher, IMemoryCache cache) : base(commandDispatcher)
+        public LoginController(ICommandDispatcher commandDispatcher, IMemoryCache cache) : base(commandDispatcher)
         {
             _cache = cache;
         }
 
-        [HttpPut]
-        [Route("password")]
-        public async Task<IActionResult> Put([FromBody]ChangeUserPassword command)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]Login command)
         {
+            command.TokenId = Guid.NewGuid();
             await CommandDispatcher.DispatchAsync(command);
+            var jwt = _cache.GetJwt(command.TokenId);
 
-            return NoContent();
+            return Json(jwt);
         }
     }
 }

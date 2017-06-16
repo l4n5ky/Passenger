@@ -11,5 +11,7 @@ namespace Passenger.Infrastructure.Services
         Task<IEnumerable<UserDto>> BrowseAsync();
 
         Task RegisterAsync(string email, string username, string password, string role);
+
+        Task LoginAsync(string email, string password);
     }
 }
