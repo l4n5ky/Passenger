@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +13,7 @@ namespace Passenger.Core.Domain
         public string Name { get; protected set; }
         public Vehicle Vehicle { get; protected set; }
         public DateTime UpdatedAt { get; private set; }
+
         public IEnumerable<Route> Routes
         {
             get { return _routes; }
@@ -34,13 +35,13 @@ namespace Passenger.Core.Domain
             Name = user.Username;
         }
 
-        public void SetVehicle(Vehicle vehicle)
+        public void SetVehicle(string brand, string name, int seats)
         {
-            Vehicle = vehicle;
+            Vehicle = Vehicle.Create(brand, name, seats);
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public void AddRoute(string name, Node start, Node end, double length)
+        public void AddRoute(string name, Node start, Node end)
         {
             var route = Routes.SingleOrDefault(x => x.Name == name);
             if (route != null)
@@ -48,7 +49,7 @@ namespace Passenger.Core.Domain
                 throw new Exception($"Route with name: '{name}' already exists for driver: {Name}.");
             }
 
-            _routes.Add(Route.Create(name, start, end, length));
+            _routes.Add(Route.Create(name, start, end));
             UpdatedAt = DateTime.UtcNow;
         }
 

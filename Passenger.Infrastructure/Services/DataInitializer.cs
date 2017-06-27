@@ -8,11 +8,16 @@ namespace Passenger.Infrastructure.Services
     public class DataInitializer : IDataInitializer
     {
         private readonly IUserService _userService;
+        private readonly IDriverService _driverService;
+        private readonly IDriverRouteService _driverRouteService;
         private readonly ILogger<DataInitializer> _logger;
 
-        public DataInitializer(IUserService userService, ILogger<DataInitializer> logger)
+        public DataInitializer(IUserService userService, IDriverService driverService,
+            IDriverRouteService driverRouteService, ILogger<DataInitializer> logger)
         {
             _userService = userService;
+            _driverService = driverService;
+            _driverRouteService = driverRouteService;
             _logger = logger;
         }
 
@@ -27,6 +32,13 @@ namespace Passenger.Infrastructure.Services
 
                 tasks.Add(_userService.RegisterAsync(userId, $"{username}@email.com", username,
                     $"password{i}", "user"));
+
+                if (i % 3 == 1)
+                {
+                    tasks.Add(_driverService.CreateAsync(userId));
+                    tasks.Add(_driverService.SetVehicleAsync(userId, "Audi", $"A{i}", 4));
+                    tasks.Add(_driverRouteService.AddAsync(userId, "Default", i * 9, i * 12, i * 4, i * 15));
+                }
             }
 
             await Task.WhenAll(tasks);
