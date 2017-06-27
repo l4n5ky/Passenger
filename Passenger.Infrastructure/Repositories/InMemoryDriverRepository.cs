@@ -1,10 +1,9 @@
-﻿using Passenger.Core.Repositories;
+﻿using Passenger.Core.Domain;
+using Passenger.Core.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Passenger.Core.Domain;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Passenger.Infrastructure.Repositories
 {

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Passenger.Infrastructure.IoC.Modules;
+using Passenger.Infrastructure.Services;
 using Passenger.Infrastructure.Settings;
 using System;
 using System.Text;
@@ -32,8 +33,8 @@ namespace Passenger.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services. 
-            services.AddMvc();
             services.AddMemoryCache();
+            services.AddMvc();
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -62,6 +63,13 @@ namespace Passenger.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
                 }
             });
+
+            var generalSettings = app.ApplicationServices.GetService<GeneralSettings>();
+            if (generalSettings.SeedData)
+            {
+                var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
+                dataInitializer.SeedAsync();
+            }
 
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());

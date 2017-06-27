@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Passenger.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Passenger.Api", "Passenger.Api\Passenger.Api.csproj", "{184CBBC4-3A81-4921-9DAD-FF299EDA2F26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Passenger.Tests.EndToEnd", "Passenger.Tests.EndToEnd\Passenger.Tests.EndToEnd.csproj", "{DD008C23-03CD-41CD-92BF-57885A224C15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{184CBBC4-3A81-4921-9DAD-FF299EDA2F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{184CBBC4-3A81-4921-9DAD-FF299EDA2F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{184CBBC4-3A81-4921-9DAD-FF299EDA2F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD008C23-03CD-41CD-92BF-57885A224C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD008C23-03CD-41CD-92BF-57885A224C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD008C23-03CD-41CD-92BF-57885A224C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD008C23-03CD-41CD-92BF-57885A224C15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
