@@ -36,7 +36,7 @@ namespace Passenger.Infrastructure.Services
                 if (i % 3 == 1)
                 {
                     tasks.Add(_driverService.CreateAsync(userId));
-                    tasks.Add(_driverService.SetVehicleAsync(userId, "Audi", $"A{i}", 4));
+                    tasks.Add(_driverService.SetVehicleAsync(userId, "Audi", $"A{i}"));
                     tasks.Add(_driverRouteService.AddAsync(userId, "Default", i * 9, i * 12, i * 4, i * 15));
                 }
             }
