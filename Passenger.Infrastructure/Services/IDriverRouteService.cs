@@ -8,5 +8,6 @@ namespace Passenger.Infrastructure.Services
         Task AddAsync(Guid userId, string name,
             double startLat, double startLong,
             double endLat, double endLong);
+        Task DeleteAsync(Guid userId, string name);
     }
 }

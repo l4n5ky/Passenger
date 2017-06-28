@@ -2,8 +2,6 @@
 using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Passenger.Infrastructure.Services
@@ -33,6 +31,13 @@ namespace Passenger.Infrastructure.Services
             var start = Node.Create("Start address", startLat, startLong);
             var end = Node.Create("End address", endLat, endLong);
             driver.AddRoute(name, start, end);
+            await _driverRepository.UpdateAsync(driver);
+        }
+
+        public async Task DeleteAsync(Guid userId, string name)
+        {
+            var driver = await _driverRepository.GetAsync(userId);
+            driver.DeleteRoute(name);
             await _driverRepository.UpdateAsync(driver);
         }
     }
