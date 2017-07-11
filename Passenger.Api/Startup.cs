@@ -73,6 +73,7 @@ namespace Passenger.Api
                 dataInitializer.SeedAsync();
             }
 
+            app.UseExceptionHandler();
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }

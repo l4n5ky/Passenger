@@ -20,10 +20,10 @@ namespace Passenger.Api.Controllers
             _driverService = driverService;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IEnumerable<DriverDto>> Get()
             => await _driverService.BrowseAsync();
-
+        
         [HttpGet]
         [Route("{userId}")]
         public async Task<IActionResult> Get(Guid userId)
