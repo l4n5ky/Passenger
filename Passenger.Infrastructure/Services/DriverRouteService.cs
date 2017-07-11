@@ -39,7 +39,7 @@ namespace Passenger.Infrastructure.Services
 
         public async Task DeleteAsync(Guid userId, string name)
         {
-            var driver = await _driverRepository.GetAsync(userId);
+            var driver = await _driverRepository.GetOrFailAsync(userId);
             driver.DeleteRoute(name);
             await _driverRepository.UpdateAsync(driver);
         }

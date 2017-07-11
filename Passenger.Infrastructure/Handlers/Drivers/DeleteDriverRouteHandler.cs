@@ -1,7 +1,6 @@
 ﻿using Passenger.Infrastructure.Commands;
 using Passenger.Infrastructure.Commands.Drivers;
 using Passenger.Infrastructure.Services;
-using System;
 using System.Threading.Tasks;
 
 namespace Passenger.Infrastructure.Handlers.Drivers

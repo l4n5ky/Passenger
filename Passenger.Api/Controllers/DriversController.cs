@@ -37,10 +37,29 @@ namespace Passenger.Api.Controllers
             return Json(driver);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateDriver command)
         {
             await DispatchAsync(command);
+
+            return Created($"drivers/{command.UserId}", null);
+        }
+
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody]UpdateDriver command)
+        {
+            await DispatchAsync(command);
+
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpDelete("me")]
+        public async Task<IActionResult> Delete()
+        {
+            await DispatchAsync(new DeleteDriver());
 
             return NoContent();
         }
