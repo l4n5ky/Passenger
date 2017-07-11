@@ -41,7 +41,7 @@ namespace Passenger.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public void AddRoute(string name, Node start, Node end)
+        public void AddRoute(string name, Node start, Node end, double distance)
         {
             var route = Routes.SingleOrDefault(x => x.Name == name);
             if (route != null)
@@ -49,7 +49,7 @@ namespace Passenger.Core.Domain
                 throw new Exception($"Route with name: '{name}' already exists for driver: {Name}.");
             }
 
-            _routes.Add(Route.Create(name, start, end));
+            _routes.Add(Route.Create(name, start, end, distance));
             UpdatedAt = DateTime.UtcNow;
         }
 

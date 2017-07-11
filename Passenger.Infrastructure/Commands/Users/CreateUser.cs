@@ -1,4 +1,4 @@
-﻿namespace Passenger.Infrastructure.Commands.Users
+﻿    namespace Passenger.Infrastructure.Commands.Users
 {
     public class CreateUser : ICommand
     {

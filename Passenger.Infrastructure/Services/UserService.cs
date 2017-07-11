@@ -2,6 +2,7 @@
 using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
 using Passenger.Infrastructure.DTO;
+using Passenger.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace Passenger.Infrastructure.Services
             var user = await _userRepository.GetAsync(email);
             if (user != null)
             {
-                throw new Exception($"User with email {email} already exist.");
+                throw new ServiceException(Exceptions.ErrorCodes.EmailInUse, $"User with email {email} already exists.");
             }
 
             var salt = _encrypter.GetSalt(password);
@@ -55,7 +56,7 @@ namespace Passenger.Infrastructure.Services
             var user = await _userRepository.GetAsync(email);
             if (user == null)
             {
-                throw new Exception("Invalid credentials.");
+                throw new ServiceException(Exceptions.ErrorCodes.InvalidCredentials, "Invalid credentials.");
             }
 
             var hash = _encrypter.GetHash(password, user.Salt);
@@ -65,7 +66,7 @@ namespace Passenger.Infrastructure.Services
                 return;
             }
 
-            throw new Exception("Invalid credentials.");
+            throw new ServiceException(Exceptions.ErrorCodes.InvalidCredentials, "Invalid credentials.");
         }
     }
 }
