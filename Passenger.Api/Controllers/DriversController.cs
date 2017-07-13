@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using NLog;
 using Passenger.Infrastructure.Commands;
 using Passenger.Infrastructure.Commands.Drivers;
-using Passenger.Infrastructure.DTO;
 using Passenger.Infrastructure.Services;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Passenger.Api.Controllers
