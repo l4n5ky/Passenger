@@ -36,5 +36,18 @@ namespace Passenger.Infrastructure.Extensions
 
             return user;
         }
+
+        public static async Task<User> GetOrFailAsync(this IUserRepository repository,
+            string email)
+        {
+            var user = await repository.GetAsync(email);
+            if (user == null)
+            {
+                throw new ServiceException(Exceptions.ErrorCodes.UserNotFound,
+                    $"User with email : {email} was not found.");
+            }
+
+            return user;
+        }
     }
 }

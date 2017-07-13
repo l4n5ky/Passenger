@@ -2,6 +2,8 @@
 using Passenger.Core.Domain;
 using Passenger.Core.Repositories;
 using Passenger.Infrastructure.DTO;
+using Passenger.Infrastructure.Exceptions;
+using Passenger.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -33,15 +35,11 @@ namespace Passenger.Infrastructure.Services
 
         public async Task CreateAsync(Guid userId)
         {
-            var user = await _userRepository.GetAsync(userId);
-            if (user == null)
-            {
-                throw new Exception($"User with id {userId} doesn't exists.");
-            }
+            var user = await _userRepository.GetOrFailAsync(userId);
             var driver = await _driverRepository.GetAsync(userId);
             if (driver != null)
             {
-                throw new Exception($"Driver with id {userId} already exists.");
+                throw new ServiceException(Exceptions.ErrorCodes.DriverAlreadyExists, $"Driver with id {userId} already exists.");
             }
 
             driver = new Driver(user);
