@@ -1,48 +1,50 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using NLog;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Passenger.Infrastructure.Services
 {
     public class DataInitializer : IDataInitializer
     {
+        private static Logger Logger = LogManager.GetCurrentClassLogger(); 
         private readonly IUserService _userService;
         private readonly IDriverService _driverService;
         private readonly IDriverRouteService _driverRouteService;
-        private readonly ILogger<DataInitializer> _logger;
 
         public DataInitializer(IUserService userService, IDriverService driverService,
-            IDriverRouteService driverRouteService, ILogger<DataInitializer> logger)
+            IDriverRouteService driverRouteService)
         {
             _userService = userService;
             _driverService = driverService;
             _driverRouteService = driverRouteService;
-            _logger = logger;
         }
 
         public async Task SeedAsync()
         {
-            _logger.LogTrace("Initializing data...");
-            var tasks = new List<Task>();
+            var users = await _userService.BrowseAsync();
+            if(users.Any())
+            {
+                return;
+            }
+
+            Logger.Info("Initializing data...");
             for (int i = 1; i <= 10; i++)
             {
                 var userId = Guid.NewGuid();
                 var username = $"user{i}";
 
-                tasks.Add(_userService.RegisterAsync(userId, $"{username}@email.com", username,
-                    $"password{i}", "user"));
+                await _userService.RegisterAsync(userId, $"{username}@email.com", 
+                    username, $"password{i}", "user");
 
                 if (i % 3 == 1)
                 {
-                    tasks.Add(_driverService.CreateAsync(userId));
-                    tasks.Add(_driverService.SetVehicleAsync(userId, "Audi", "RS8"));
-                    tasks.Add(_driverRouteService.AddAsync(userId, "Default", (i + 2) * 9, (i + 4) * 12, (i + 3) * 4, (i + 1) * 15));
+                    await _driverService.CreateAsync(userId);
+                    await _driverService.SetVehicleAsync(userId, "Audi", "RS8");
+                    await _driverRouteService.AddAsync(userId, "Default", (i + 2) * 9, (i + 4) * 12, (i + 3) * 4, (i + 1) * 15);
                 }
             }
-
-            await Task.WhenAll(tasks);
-            _logger.LogTrace("Data was initialized.");
+            Logger.Info("Data was initialized successfully.");
         }
     }
 }

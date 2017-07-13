@@ -11,6 +11,7 @@ using NLog.Extensions.Logging;
 using NLog.Web;
 using Passenger.Api.Framework;
 using Passenger.Infrastructure.IoC.Modules;
+using Passenger.Infrastructure.Mongo;
 using Passenger.Infrastructure.Services;
 using Passenger.Infrastructure.Settings;
 using System;
@@ -72,6 +73,8 @@ namespace Passenger.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
                 }
             });
+
+            MongoConfigurator.Initialize();
 
             var generalSettings = app.ApplicationServices.GetService<GeneralSettings>();
             if (generalSettings.SeedData)
