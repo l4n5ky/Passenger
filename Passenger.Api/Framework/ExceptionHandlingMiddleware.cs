@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Passenger.Api.Framework
 {
-    public class ExceptionHandlerMiddleware
+    public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public ExceptionHandlerMiddleware(RequestDelegate next)
+        public ExceptionHandlingMiddleware(RequestDelegate next)
         {
             _next = next;
         }
@@ -38,6 +38,7 @@ namespace Passenger.Api.Framework
             {
                 case Exception e when exceptionType == typeof(UnauthorizedAccessException):
                     statusCode = HttpStatusCode.Unauthorized;
+                    errorCode = "unauthorized";
                     break;
                 case ServiceException e when exceptionType == typeof(ServiceException):
                     statusCode = HttpStatusCode.BadRequest;
@@ -45,6 +46,7 @@ namespace Passenger.Api.Framework
                     break;
                 case Exception e when exceptionType == typeof(Exception):
                     statusCode = HttpStatusCode.InternalServerError;
+                    errorCode = "internal_server_error";
                     break;
             }
 

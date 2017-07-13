@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using Passenger.Api.Framework;
 using Passenger.Infrastructure.IoC.Modules;
 using Passenger.Infrastructure.Services;
 using Passenger.Infrastructure.Settings;
@@ -79,7 +80,7 @@ namespace Passenger.Api
                 dataInitializer.SeedAsync();
             }
 
-            app.UseExceptionHandler();
+            app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }

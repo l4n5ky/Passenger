@@ -24,7 +24,6 @@ namespace Passenger.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            Logger.Info("Fetching drivers.");
             var drivers = await _driverService.BrowseAsync();
 
             return Json(drivers);
